@@ -2,6 +2,7 @@
   "name": "remirror-ie11-starter",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://whawker.github.io/remirror-ie11-starter",
   "dependencies": {
     "@remirror/pm": "^1.0.10",
     "@remirror/react": "^1.0.21",
