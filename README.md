@@ -47,3 +47,7 @@ I couldn't find an obvious NPM package providing a polyfill for this method, so 
 ### CSS
 
 Remirror relies heavily on CSS variables, which cannot be used in IE11 and no workaround exists. A copy of Remirror's `all.css` with CSS variables removed and replaced with their actual values [exists in the repo](https://github.com/whawker/remirror-ie11-starter/blob/main/src/App.css).
+
+## Applying the polyfills
+
+All the above polyfills should be applied before importing Remirror. All of them are present in the [`polyfills.ts` file](https://github.com/whawker/remirror-ie11-starter/blob/main/src/polyfills.ts), this is [imported as the first line of `index.tsx`](https://github.com/whawker/remirror-ie11-starter/blob/main/src/index.tsx#L1).
