@@ -1,6 +1,9 @@
+// polyfill all actual features - stable ES, web standards and stage 3 ES proposals:
 import 'core-js/actual';
+// polyfill String.prototype.normalize
 import 'unorm';
 
+// Polyfill for ParentNode.appends
 (function (nodeTypes: Node[]) {
   function isNode(arg: Node | String): arg is Node {
     return arg instanceof Node;
