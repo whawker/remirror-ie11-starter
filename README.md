@@ -8,7 +8,7 @@ The Remirror code base does not support IE11, however the spike was to see if po
 
 ## TLDR
 
-In short, **yes**. Initial signs are very positive, applying 3 polyfills and a tweak to `browserslist` config resulted in a working editor. A small caveat however, you will need to implement your own CSS as Remirror relies heavily on CSS variables which do not work in IE11.
+In short, **yes**. Initial signs are very positive, applying 4 polyfills and a tweak to `browserslist` config resulted in a working editor. A small caveat however, you will need to implement your own CSS as Remirror relies heavily on CSS variables which do not work in IE11.
 
 [The result](https://whawker.github.io/remirror-ie11-starter/)
 
@@ -37,6 +37,12 @@ This is not provided by `core-js`, so instead I've used the [`unorm`](https://gi
 // polyfill String.prototype.normalize
 import 'unorm';
 ```
+
+### DOMRect
+
+A `DOMRect` describes the size and position of a rectangle. It is used by Remirror's positioners and table plugins.
+
+Full [geometry polyfills](https://github.com/jarek-foksa/geometry-polyfill) exist, however we only require the `DOMRect` constructor, which I have taken from [Remirror's Jest polyfills](https://github.com/remirror/remirror/blob/a2ca7a83f35b3831b97817eb2cb38b1a82d60ab8/packages/jest-remirror/src/jsdom-polyfills.ts#L57-L79).
 
 ### ParentNode.append
 
