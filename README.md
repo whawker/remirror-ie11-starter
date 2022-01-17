@@ -8,7 +8,7 @@ The Remirror code base does not support IE11, however the spike was to see if po
 
 ## TLDR
 
-In short, **yes**. Initial signs are very positive, applying 4 polyfills and a tweak to `browserslist` config resulted in a working editor. A small caveat however, you will need to implement your own CSS as Remirror relies heavily on CSS variables which do not work in IE11.
+In short, **yes**. Initial signs are very positive, applying 5 polyfills and a tweak to `browserslist` config resulted in a working editor. A small caveat however, you will need to implement your own CSS as Remirror relies heavily on CSS variables which do not work in IE11.
 
 [The result](https://whawker.github.io/remirror-ie11-starter/)
 
@@ -27,6 +27,12 @@ Next were the usual suspects - `Object doesn't support property or method 'find'
 import `core-js/actual`;
 ```
 
+### ParentNode.append and Node.remove
+
+Additionally, there are the DOM methods, `ParentNode.append` and `Node.remove` which are not supported in IE11.
+
+These have been polyfilled using [`dom-node-polyfills`](https://www.npmjs.com/package/dom-node-polyfills).
+
 ### String.prototype.normalize
 
 Next is a String method I never knew existed, `String.prototype.normalize` which returns the Unicode Normalization Form of the string - this is used in Remirror for input sanitization.
@@ -38,17 +44,19 @@ This is not provided by `core-js`, so instead I've used the [`unorm`](https://gi
 import 'unorm';
 ```
 
+### window.HTMLTemplateElement
+
+Remirror's React Table plugin uses `jsx-dom` for convenience - however this uses `HTMLTemplateElement` in some of it's logic.
+
+Multiple polyfills exist for this use case, some which polyfill the entire custom elements API.
+
+I have chosen a minimal polyfill, [`@webcomponents/template`](https://www.npmjs.com/package/@webcomponents/template) which seems work nicely.
+
 ### DOMRect
 
 A `DOMRect` describes the size and position of a rectangle. It is used by Remirror's positioners and table plugins.
 
-Full [geometry polyfills](https://github.com/jarek-foksa/geometry-polyfill) exist, however we only require the `DOMRect` constructor, which I have taken from [Remirror's Jest polyfills](https://github.com/remirror/remirror/blob/a2ca7a83f35b3831b97817eb2cb38b1a82d60ab8/packages/jest-remirror/src/jsdom-polyfills.ts#L57-L79).
-
-### ParentNode.append
-
-Finally, is a convenience DOM method, `ParentNode.append`, which is not supported in IE11.
-
-I couldn't find an obvious NPM package providing a polyfill for this method, so I used the code provided [here](https://docs.w3cub.com/dom/parentnode/append.html#Polyfill), and [added some type annotations](https://github.com/whawker/remirror-ie11-starter/blob/main/src/polyfills.ts#L6-L31).
+Full [geometry polyfills](https://github.com/jarek-foksa/geometry-polyfill) exist, however we only require the `DOMRect` constructor, which I have taken from [Remirror's Jest polyfills](https://github.com/remirror/remirror/blob/main/packages/jest-remirror/src/jsdom-polyfills.ts#L11-L35).
 
 ### CSS
 
