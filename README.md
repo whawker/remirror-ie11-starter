@@ -56,7 +56,7 @@ I have chosen a minimal polyfill, [`@webcomponents/template`](https://www.npmjs.
 
 A `DOMRect` describes the size and position of a rectangle. It is used by Remirror's positioners and table plugins.
 
-Full [geometry polyfills](https://github.com/jarek-foksa/geometry-polyfill) exist, however we only require the `DOMRect` constructor, which I have taken from [Remirror's Jest polyfills](https://github.com/remirror/remirror/blob/main/packages/jest-remirror/src/jsdom-polyfills.ts#L11-L35).
+Full [geometry polyfills](https://github.com/jarek-foksa/geometry-polyfill) exist, however we only require the `DOMRect` constructor, which I have taken from [Remirror's Jest polyfills](https://github.com/remirror/remirror/blob/a2ca7a83f35b3831b97817eb2cb38b1a82d60ab8/packages/jest-remirror/src/jsdom-polyfills.ts#L57-L79).
 
 ### CSS
 
